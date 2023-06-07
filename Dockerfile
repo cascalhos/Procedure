@@ -1,3 +1,3 @@
 FROM openjdk:17-jdk-slim
-COPY build/libs/procedure.jar teste.jar
-ENTRYPOINT ["java", "-jar", "teste.jar"]
+COPY build/libs/*.jar procedure.jar
+ENTRYPOINT ["java", "-jar", "procedure.jar"]
