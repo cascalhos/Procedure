@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ProceduresController {
 
-    @GetMapping(path = "/")
+    @GetMapping(path = "/hello-world")
     public String aa(){
-        return "testeeeee";
+        return "Hello World";
     }
 }
