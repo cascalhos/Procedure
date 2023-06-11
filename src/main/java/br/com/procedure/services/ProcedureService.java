@@ -1,4 +1,7 @@
 package br.com.procedure.services;
 
-public interface ProcedureService {
+import br.com.procedure.entities.Procedures;
+
+public interface ProcedureService{
+    public void insert(Procedures procedures);
 }
