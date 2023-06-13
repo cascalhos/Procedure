@@ -1,32 +1,36 @@
 package br.com.procedure.controllers;
 
-import br.com.procedure.entities.Procedures;
+import br.com.procedure.entities.Procedure;
 import br.com.procedure.services.ProcedureService;
-import br.com.procedure.services.impl.ProcedureServiceIMPL;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 
+@RequiredArgsConstructor
 @RestController
 public class ProceduresController {
-    @Autowired
-    ProcedureService procedureService;
-    @Autowired
-    ProcedureServiceIMPL procedureServiceIMPL;
-    @GetMapping(path = "a")
-    public String a(){
-        return "a";
-    }
+
+    private final ProcedureService procedureService;
     @GetMapping(path = "/hello-world")
-    public String aa(){
+    public String helloWord(){
         return "Hello World";
     }
-
-    @PostMapping(path = "/b")
-    public void n(){
-        Procedures procedures = new Procedures(1, "aaa");
-        procedureService.insert(procedures);
+    @PostMapping(path = "/create")
+    public void create(@RequestBody Procedure procedure){
+        procedureService.create(procedure);
     }
+    @GetMapping(path = "/find/{id}")
+    public Procedure findById(@PathVariable("id") Integer id){
+        return procedureService.findById(id);
+    }
+    @PutMapping(path = "/update")
+    public ResponseEntity update(@RequestBody Procedure procedure){
+        return  procedureService.update(procedure);
+    }
+    @DeleteMapping(path = "/delete/{id}")
+    public void delete(@PathVariable("id") Integer id){
+        procedureService.delete(id);
+    }
+
 }
