@@ -6,9 +6,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("procedures")
 public class ProceduresController {
 
     private final ProcedureService procedureService;
@@ -21,7 +24,7 @@ public class ProceduresController {
         procedureService.create(procedure);
     }
     @GetMapping(path = "/find/{id}")
-    public Procedure findById(@PathVariable("id") Integer id){
+    public Procedure findById(@PathVariable("id") String id){
         return procedureService.findById(id);
     }
     @PutMapping(path = "/update")
@@ -29,8 +32,13 @@ public class ProceduresController {
         return  procedureService.update(procedure);
     }
     @DeleteMapping(path = "/delete/{id}")
-    public void delete(@PathVariable("id") Integer id){
+    public void delete(@PathVariable("id") String id){
         procedureService.delete(id);
+    }
+    @GetMapping
+    public ResponseEntity<List<Procedure>> findAllProcedures(){
+        List<Procedure> listProcedures = procedureService.findAllProcedures();
+        return ResponseEntity.ok(listProcedures);
     }
 
 }

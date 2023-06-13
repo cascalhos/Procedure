@@ -7,7 +7,6 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
-
 import java.util.List;
 
 @Document
@@ -17,13 +16,14 @@ import java.util.List;
 public class Procedure {
     @MongoId
     @Indexed(unique = true)
-    private Integer id;
+    private String id;
     @Indexed(unique = true)
     private String procedureName;
     private List<Session> sessions;
 
-    public Procedure(Integer id, String procedureName) {
-        this.id = id;
+    public Procedure(String procedureName, List<Session> sessions) {
         this.procedureName = procedureName;
+        this.sessions = sessions;
     }
+
 }

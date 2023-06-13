@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -18,9 +19,15 @@ public class ProcedureServiceIMPL implements ProcedureService {
         repository.insert(procedure);
     }
     @Override
-    public void delete(Integer id){
+    public void delete(String id){
         repository.deleteById(id);
     }
+
+    @Override
+    public List<Procedure> findAllProcedures() {
+        return repository.findAll();
+    }
+
     @Override
     public ResponseEntity<String> update(Procedure procedure){
         if(repository.findById(procedure.getId()).isPresent()){
@@ -30,7 +37,7 @@ public class ProcedureServiceIMPL implements ProcedureService {
         return ResponseEntity.of(Optional.of("error"));
     }
     @Override
-    public Procedure findById(Integer id){
+    public Procedure findById(String id){
         return repository.findById(id).isPresent()?repository.findById(id).get():null;
     }
 
