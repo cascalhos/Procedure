@@ -4,6 +4,7 @@ import br.com.procedure.entities.Procedure;
 import br.com.procedure.repository.ProcedureRepository;
 import br.com.procedure.services.ProcedureService;
 import lombok.RequiredArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -30,15 +31,13 @@ public class ProcedureServiceIMPL implements ProcedureService {
 
     @Override
     public ResponseEntity<String> update(Procedure procedure){
-        if(repository.findById(procedure.getId()).isPresent()){
-            repository.save(procedure);
-            return ResponseEntity.ok("updated");
-        }
         return ResponseEntity.of(Optional.of("error"));
     }
     @Override
     public Procedure findById(String id){
-        return repository.findById(id).isPresent()?repository.findById(id).get():null;
+        ObjectId objectId = new ObjectId(id);
+        return repository.findById(id).get();
+        //return repository.findById(id).isPresent()?repository.findById(id).get():null;
     }
 
 }
