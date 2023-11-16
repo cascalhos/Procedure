@@ -1,15 +1,16 @@
 package br.com.procedure.services;
 
+import br.com.procedure.dtos.ProcedureCreateRequest;
+import br.com.procedure.dtos.ProcedureResponse;
 import br.com.procedure.entities.Procedure;
-import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface ProcedureService{
-    public void create(Procedure procedures);
+    public ResponseEntity<ProcedureResponse> create(ProcedureCreateRequest procedureRequest);
 
-    public Procedure findById(String id);
+    public ResponseEntity<ProcedureResponse> findById(String id);
 
     public ResponseEntity update(Procedure procedure);
 
