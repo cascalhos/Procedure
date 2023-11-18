@@ -2,6 +2,7 @@ package br.com.procedure.services;
 
 import br.com.procedure.dtos.ProcedureCreateRequest;
 import br.com.procedure.dtos.ProcedureResponse;
+import br.com.procedure.dtos.ProcedureUpdateRequest;
 import br.com.procedure.entities.Procedure;
 import org.springframework.http.ResponseEntity;
 
@@ -12,7 +13,7 @@ public interface ProcedureService{
 
     public ResponseEntity<ProcedureResponse> findById(String id);
 
-    public ResponseEntity update(Procedure procedure);
+    public ResponseEntity update(ProcedureUpdateRequest procedure);
 
     public void delete(String id);
 

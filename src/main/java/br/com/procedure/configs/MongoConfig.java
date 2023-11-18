@@ -57,7 +57,11 @@ public class MongoConfig {
                 new Procedure("Peelings Químicos", sessionsPeelingsQuimicos),
                 new Procedure("Dermaplaning", sessionsDermaplaning)
         );
-
-        procedureRepository.insert(procedures);
+        procedureRepository.insert(procedures.get(0));
+        procedureRepository.insert(procedures.get(1));
+        procedureRepository.insert(procedures.get(2));
+        procedureRepository.insert(procedures.get(3));
+        procedureRepository.insert(procedures.get(4));
+        procedureRepository.insert(procedures.get(5));
     }
 }

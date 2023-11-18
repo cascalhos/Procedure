@@ -2,12 +2,15 @@ package br.com.procedure.services.impl;
 
 import br.com.procedure.dtos.ProcedureCreateRequest;
 import br.com.procedure.dtos.ProcedureResponse;
+import br.com.procedure.dtos.ProcedureUpdateRequest;
 import br.com.procedure.entities.Procedure;
 import br.com.procedure.repository.ProcedureRepository;
 import br.com.procedure.services.ProcedureService;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
+import org.modelmapper.Condition;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeMap;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -40,8 +43,20 @@ public class ProcedureServiceIMPL implements ProcedureService {
     }
 
     @Override
-    public ResponseEntity<String> update(Procedure procedure){
-        return ResponseEntity.of(Optional.of("error"));
+    public ResponseEntity<ProcedureResponse> update(ProcedureUpdateRequest procedureUpdateRequest){
+        ModelMapper modelMapper = new ModelMapper();
+
+        if(procedureUpdateRequest.getSessions()==null){
+            Procedure pro =modelMapper.map(procedureUpdateRequest,Procedure.class);
+            pro.setSessions(repository.findById(procedureUpdateRequest.getId()).get().getSessions());
+            repository.save(pro);
+            ProcedureResponse response = modelMapper.map(pro,ProcedureResponse.class);
+            return new ResponseEntity<>(response,HttpStatus.OK);
+        }
+        repository.save(modelMapper.map(procedureUpdateRequest,Procedure.class));
+
+        ProcedureResponse respose = modelMapper.map(procedureUpdateRequest,ProcedureResponse.class);
+        return new ResponseEntity<>(respose,HttpStatus.OK);
     }
     @Override
     public ResponseEntity<ProcedureResponse> findById(String id){

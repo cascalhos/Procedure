@@ -2,6 +2,7 @@ package br.com.procedure.controllers;
 
 import br.com.procedure.dtos.ProcedureCreateRequest;
 import br.com.procedure.dtos.ProcedureResponse;
+import br.com.procedure.dtos.ProcedureUpdateRequest;
 import br.com.procedure.entities.Procedure;
 import br.com.procedure.services.ProcedureService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,9 +29,9 @@ public class ProceduresController {
     public ResponseEntity<ProcedureResponse> findById(@PathVariable("id") String id){
         return procedureService.findById(id);
     }
-    @PutMapping(path = "/{id}")
+    @PutMapping
     @Operation(summary = "Update a Procedure")
-    public ResponseEntity update(@RequestBody Procedure procedure){
+    public ResponseEntity update(@RequestBody ProcedureUpdateRequest procedure){
         return  procedureService.update(procedure);
     }
     @DeleteMapping(path = "/{id}")//funcionando
@@ -38,7 +39,7 @@ public class ProceduresController {
     public void delete(@PathVariable("id") String id){
         procedureService.delete(id);
     }
-    @GetMapping
+    @GetMapping//funcionando
     @Operation(summary = "Get all Procedures available")
     public ResponseEntity<List<Procedure>> findAllProcedures(){//funcionando
         List<Procedure> listProcedures = procedureService.findAllProcedures();
