@@ -9,11 +9,11 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface ProcedureService{
-    public ResponseEntity<ProcedureResponse> create(ProcedureCreateRequest procedureRequest);
+    public ProcedureResponse create(ProcedureCreateRequest procedureRequest);
 
-    public ResponseEntity<ProcedureResponse> findById(String id);
+    public ProcedureResponse findById(String id);
 
-    public ResponseEntity update(ProcedureUpdateRequest procedure);
+    public ProcedureResponse update(ProcedureUpdateRequest procedure);
 
     public void delete(String id);
 

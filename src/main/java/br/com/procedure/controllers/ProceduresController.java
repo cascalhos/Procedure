@@ -21,7 +21,7 @@ public class ProceduresController {
     private final ProcedureService procedureService;
     @PostMapping//funcionando
     @Operation(summary = "Create a Procedure")
-    public ResponseEntity<ProcedureResponse> create(@RequestBody ProcedureCreateRequest procedureRequest){
+    public ProcedureResponse create(@RequestBody ProcedureCreateRequest procedureRequest){
         return procedureService.create(procedureRequest);
     }
     @GetMapping(path = "/{id}")//funcionando
