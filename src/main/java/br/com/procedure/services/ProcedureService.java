@@ -17,6 +17,6 @@ public interface ProcedureService{
 
     public void delete(String id);
 
-    List<Procedure> findAllProcedures();
+    List<ProcedureResponse> findAllProcedures();
 
 }

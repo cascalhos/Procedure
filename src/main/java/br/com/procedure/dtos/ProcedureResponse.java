@@ -16,7 +16,7 @@ import java.util.List;
 public class ProcedureResponse {
     private String id;
     private String procedureName;
-    private List<Session> sessions;
+    private List<SessionResponse> sessions;
 
     public ProcedureResponse(String id, String procedureName) {
         this.id = id;

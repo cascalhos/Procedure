@@ -19,31 +19,30 @@ import java.util.List;
 public class ProceduresController {
 
     private final ProcedureService procedureService;
-    @PostMapping//funcionando
+    @PostMapping
     @Operation(summary = "Create a Procedure")
     public ProcedureResponse create(@RequestBody ProcedureCreateRequest procedureRequest){
         return procedureService.create(procedureRequest);
     }
-    @GetMapping(path = "/{id}")//funcionando
+    @GetMapping(path = "/{id}")
     @Operation(summary = "Find a Procedure by Id")
-    public ResponseEntity<ProcedureResponse> findById(@PathVariable("id") String id){
+    public ProcedureResponse findById(@PathVariable("id") String id){
         return procedureService.findById(id);
     }
     @PutMapping
     @Operation(summary = "Update a Procedure")
-    public ResponseEntity update(@RequestBody ProcedureUpdateRequest procedure){
+    public ProcedureResponse update(@RequestBody ProcedureUpdateRequest procedure){
         return  procedureService.update(procedure);
     }
-    @DeleteMapping(path = "/{id}")//funcionando
+    @DeleteMapping(path = "/{id}")
     @Operation(summary = "Delete a Procedure by Id")
     public void delete(@PathVariable("id") String id){
         procedureService.delete(id);
     }
-    @GetMapping//funcionando
+    @GetMapping
     @Operation(summary = "Get all Procedures available")
-    public ResponseEntity<List<Procedure>> findAllProcedures(){//funcionando
-        List<Procedure> listProcedures = procedureService.findAllProcedures();
-        return ResponseEntity.ok(listProcedures);
+    public List<ProcedureResponse> findAllProcedures(){
+        return procedureService.findAllProcedures();
     }
 
 }

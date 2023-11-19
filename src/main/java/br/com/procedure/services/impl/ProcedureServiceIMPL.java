@@ -12,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,7 @@ public class ProcedureServiceIMPL implements ProcedureService {
     private final ProcedureRepository repository;
 
     private final ModelMapper modelMapper;
+    private final ArrayList<ProcedureResponse> procedureResponseList;
     @Override
     public ProcedureResponse create(ProcedureCreateRequest procedureRequest){
         Procedure procedure = modelMapper.map(procedureRequest,Procedure.class);
@@ -35,8 +37,12 @@ public class ProcedureServiceIMPL implements ProcedureService {
     }
 
     @Override
-    public List<Procedure> findAllProcedures() {
-        return repository.findAll();
+    public List<ProcedureResponse> findAllProcedures() {
+        repository.findAll().forEach((procedure)->{
+            ProcedureResponse procedureResponse = modelMapper.map(procedure,ProcedureResponse.class);
+            procedureResponseList.add(procedureResponse);
+        });
+        return procedureResponseList;
     }
 
     @Override
@@ -50,7 +56,7 @@ public class ProcedureServiceIMPL implements ProcedureService {
     @Override
     public ProcedureResponse findById(String id){
         Procedure procedure= repository.findById(id).get();
-        ProcedureResponse procedureResponse = new ModelMapper().map(procedure,ProcedureResponse.class);
+        ProcedureResponse procedureResponse = modelMapper.map(procedure,ProcedureResponse.class);
         return procedureResponse;
     }
 
