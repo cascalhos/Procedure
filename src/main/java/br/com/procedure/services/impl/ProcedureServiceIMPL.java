@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service("procedureService")
@@ -44,11 +45,7 @@ public class ProcedureServiceIMPL implements ProcedureService {
     @Override
     public List<ProcedureResponse> findAllProcedures() {
         try{
-            repository.findAll().forEach((procedure)->{
-                ProcedureResponse procedureResponse = modelMapper.map(procedure,ProcedureResponse.class);
-                procedureResponseList.add(procedureResponse);
-            });
-            return procedureResponseList;
+            return repository.findAll().stream().map(x->modelMapper.map(x,ProcedureResponse.class)).collect(Collectors.toList());
         }
         catch (Exception e){
             throw new ValidationException(e);
